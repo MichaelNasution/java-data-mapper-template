@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 /**
  * Utility class for managing JDBC database connections.
+ * Implements basic connection management and error reporting.
  */
 public class DBConnection {
     private static Connection connection = null;
@@ -20,7 +21,7 @@ public class DBConnection {
     public static Connection getConnection() throws SQLException {
         if (connection == null || connection.isClosed()) {
             try {
-                // Ensure PostgreSQL driver is loaded (optional for modern JDBC but good practice)
+                // Ensure PostgreSQL driver is loaded
                 Class.forName("org.postgresql.Driver");
                 connection = DriverManager.getConnection(
                     DatabaseConfig.URL,
@@ -28,21 +29,26 @@ public class DBConnection {
                     DatabaseConfig.PASSWORD
                 );
             } catch (ClassNotFoundException e) {
-                throw new SQLException("PostgreSQL JDBC Driver not found", e);
+                System.err.println("[DB ERROR] PostgreSQL JDBC Driver not found in classpath.");
+                throw new SQLException("PostgreSQL JDBC Driver missing", e);
+            } catch (SQLException e) {
+                System.err.println("[DB ERROR] Failed to connect to database at: " + DatabaseConfig.URL);
+                throw e;
             }
         }
         return connection;
     }
 
     /**
-     * Closes the database connection.
+     * Closes the database connection gracefully.
      */
     public static void closeConnection() {
         if (connection != null) {
             try {
                 connection.close();
+                System.out.println("[DB] Connection closed successfully.");
             } catch (SQLException e) {
-                System.err.println("Error closing connection: " + e.getMessage());
+                System.err.println("[DB ERROR] Error closing connection: " + e.getMessage());
             }
         }
     }

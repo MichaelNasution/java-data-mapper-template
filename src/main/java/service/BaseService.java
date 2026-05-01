@@ -5,7 +5,12 @@ import java.util.List;
 
 /**
  * Generic base service class that wraps a mapper.
- * @param <T> The type of the entity.
+ * 
+ * Why Service Layer?
+ * It acts as a mediator between the presentation layer (Main) and the persistence layer (Mapper).
+ * This is where business rules, validation, and transaction management should reside.
+ * 
+ * @param <T> The type of the domain entity.
  */
 public abstract class BaseService<T> {
     protected final BaseMapper<T> mapper;

@@ -1,19 +1,17 @@
 package service;
 
-import mapper.DummyMapper;
 import model.DummyEntity;
+import java.util.List;
 
 /**
- * Service implementation for DummyEntity.
+ * Service contract for DummyEntity operations.
+ * Defines the business behavior of the system.
  */
-public class DummyService extends BaseService<DummyEntity> {
-
-    public DummyService() {
-        super(new DummyMapper());
-    }
-
-    // Additional business logic methods can be added here
-    public void printAllDummies() {
-        getAll().forEach(System.out::println);
-    }
+public interface DummyService {
+    DummyEntity getById(int id);
+    List<DummyEntity> getAll();
+    void save(DummyEntity entity);
+    void update(DummyEntity entity);
+    void delete(int id);
+    void printAllDummies();
 }
