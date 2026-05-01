@@ -1,4 +1,4 @@
-# Template Java Data Mapper - Fondasi Profesional
+# Template Java Data Mapper
 
 Template proyek Java yang modular dan bersih untuk mendemonstrasikan integrasi **JDBC**, **Java Collection Framework (JCF)**, **Inheritance**, dan **Pola Data Mapper**. Template ini dirancang sebagai fondasi tingkat engineer yang bersifat domain-agnostic untuk membangun sistem backend yang terstruktur dan mudah dikembangkan.
 
