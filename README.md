@@ -1,52 +1,52 @@
-# Java Data Mapper Template - Professional Foundation
+# Template Java Data Mapper - Fondasi Profesional
 
-A clean, modular Java project template demonstrating the integration of **JDBC**, **Java Collection Framework (JCF)**, **Inheritance**, and the **Data Mapper Pattern**. This template serves as a domain-agnostic, engineer-level foundation for building structured and extensible backend systems.
+Template proyek Java yang modular dan bersih untuk mendemonstrasikan integrasi **JDBC**, **Java Collection Framework (JCF)**, **Inheritance**, dan **Pola Data Mapper**. Template ini dirancang sebagai fondasi tingkat engineer yang bersifat domain-agnostic untuk membangun sistem backend yang terstruktur dan mudah dikembangkan.
 
-## 🔄 Data Flow Overview
+## 🔄 Gambaran Alur Data
 
 ```mermaid
 graph TD
-    Client[Client - Main] --> Service[Service Layer - Business Logic & Validation]
-    Service --> Mapper[Mapper Layer - JDBC & Data Mapping]
+    Client[Client - Main] --> Service[Lapisan Layanan - Logika Bisnis & Validasi]
+    Service --> Mapper[Lapisan Mapper - JDBC & Pemetaan Data]
     Mapper --> Database[(Database - PostgreSQL)]
 ```
 
-This flow ensures strict **separation of concerns**, allowing each layer to evolve independently without impacting the rest of the system.
+Alur ini memastikan **pemisahan tanggung jawab (separation of concerns)** yang ketat, memungkinkan setiap lapisan berkembang secara independen tanpa memengaruhi bagian sistem lainnya.
 
 ---
 
-## 🔧 Extensibility Example
+## 🔧 Contoh Pengembangan (Extensibility)
 
-The architecture is designed to be highly extensible. To add a new domain entity (e.g., `Product`), you only need to implement:
+Arsitektur ini dirancang agar sangat mudah dikembangkan. Untuk menambahkan entitas domain baru (misalnya, `Product`), Anda hanya perlu mengimplementasikan:
 
-1. **`Product`**: Extends `BaseEntity`.
-2. **`ProductMapper`**: Implements `BaseMapper<Product>`.
-3. **`ProductService`** (Interface) + **`ProductServiceImpl`** (Implementation).
+1. **`Product`**: Mewarisi `BaseEntity`.
+2. **`ProductMapper`**: Mengimplementasikan `BaseMapper<Product>`.
+3. **`ProductService`** (Interface) + **`ProductServiceImpl`** (Implementasi).
 
-**No changes are required in existing core classes**, demonstrating the Open-Closed Principle.
-
----
-
-## ⚖️ Design Trade-offs
-
-This project intentionally avoids high-level frameworks like Hibernate or Spring Boot to:
-* **Maintain full control** over SQL execution and optimization.
-* **Demonstrate the Data Mapper pattern** in its purest form.
-* **Strengthen understanding** of JDBC fundamentals and object-relational mapping.
+**Tidak ada perubahan yang diperlukan pada kelas inti yang sudah ada**, mendemonstrasikan Prinsip Open-Closed.
 
 ---
 
-## ⚠️ Current Limitations & Future Work
+## ⚖️ Pertimbangan Desain (Trade-offs)
 
-* **Connection Pooling**: Currently uses a single connection strategy; could be upgraded to HikariCP for production use.
-* **Transaction Management**: Basic implementation; lacks a dedicated `@Transactional` style manager.
-* **Logging**: Uses standard `System.out/err`; should be migrated to SLF4J/Logback for professional logging.
+Proyek ini sengaja menghindari framework tingkat tinggi seperti Hibernate atau Spring Boot untuk:
+* **Menjaga kontrol penuh** atas eksekusi dan optimasi SQL.
+* **Mendemonstrasikan pola Data Mapper** dalam bentuknya yang paling murni.
+* **Memperkuat pemahaman** tentang dasar-dasar JDBC dan pemetaan objek-relasional.
 
 ---
 
-## 🚀 How to Use
+## ⚠️ Batasan Saat Ini & Pengembangan Mendatang
 
-1. **Schema**: Apply `schema.sql` to your PostgreSQL instance.
-2. **Config**: Update `config/DatabaseConfig.java` with your credentials.
-3. **Build**: Use `mvn compile` (Maven required).
-4. **Run**: Execute the `Main` class to see the professional foundation in action.
+* **Connection Pooling**: Saat ini menggunakan strategi koneksi tunggal; dapat ditingkatkan menggunakan HikariCP untuk penggunaan produksi.
+* **Manajemen Transaksi**: Implementasi dasar; belum memiliki manajer transaksi khusus bergaya `@Transactional`.
+* **Logging**: Menggunakan `System.out/err` standar; sebaiknya dimigrasikan ke SLF4J/Logback untuk logging profesional.
+
+---
+
+## 🚀 Cara Penggunaan
+
+1. **Skema**: Terapkan `schema.sql` pada instance PostgreSQL Anda.
+2. **Konfigurasi**: Perbarui `config/DatabaseConfig.java` dengan kredensial database Anda.
+3. **Build**: Gunakan `mvn compile` (memerlukan Maven).
+4. **Jalankan**: Eksekusi kelas `Main` untuk melihat demonstrasi fondasi profesional dalam Bahasa Indonesia.

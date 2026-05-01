@@ -1,7 +1,8 @@
 package model;
 
 /**
- * Abstract base class for all domain entities.
+ * Kelas abstrak dasar untuk semua entitas domain.
+ * Menyediakan properti dasar yang akan diwarisi oleh entitas lain.
  */
 public abstract class BaseEntity {
     protected int id;

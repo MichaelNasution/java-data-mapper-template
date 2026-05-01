@@ -1,32 +1,32 @@
 package model;
 
 /**
- * A concrete implementation of BaseEntity for demonstration purposes.
+ * Implementasi konkret dari BaseEntity untuk tujuan demonstrasi.
  */
 public class DummyEntity extends BaseEntity {
-    private String name;
+    private String nama;
 
     public DummyEntity() {}
 
-    public DummyEntity(String name) {
-        this.name = name;
+    public DummyEntity(String nama) {
+        this.nama = nama;
     }
 
-    public DummyEntity(int id, String name) {
+    public DummyEntity(int id, String nama) {
         this.id = id;
-        this.name = name;
+        this.nama = nama;
     }
 
-    public String getName() {
-        return name;
+    public String getNama() {
+        return nama;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNama(String nama) {
+        this.nama = nama;
     }
 
     @Override
     public String toString() {
-        return "DummyEntity{id=" + id + ", name='" + name + "'}";
+        return "DummyEntity{id=" + id + ", nama='" + nama + "'}";
     }
 }

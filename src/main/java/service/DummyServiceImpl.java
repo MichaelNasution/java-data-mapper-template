@@ -7,8 +7,8 @@ import model.DummyEntity;
 import java.util.List;
 
 /**
- * Professional implementation of DummyService.
- * Includes validation logic and architectural separation.
+ * Implementasi profesional dari DummyService.
+ * Mencakup logika validasi dan pemisahan arsitektural.
  */
 public class DummyServiceImpl extends BaseService<DummyEntity> implements DummyService {
 
@@ -17,48 +17,50 @@ public class DummyServiceImpl extends BaseService<DummyEntity> implements DummyS
     }
 
     @Override
-    public void save(DummyEntity entity) {
-        validate(entity);
+    public void save(DummyEntity entitas) {
+        validasi(entitas);
         try {
-            super.save(entity);
+            super.save(entitas);
         } catch (Exception e) {
-            System.err.println("[SERVICE ERROR] Failed to save entity: " + e.getMessage());
-            throw new ServiceException("Could not save dummy entity", e);
+            System.err.println("[KESALAHAN LAYANAN] Gagal menyimpan entitas: " + e.getMessage());
+            throw new ServiceException("Tidak dapat menyimpan entitas dummy", e);
         }
     }
 
     @Override
-    public void update(DummyEntity entity) {
-        validate(entity);
+    public void update(DummyEntity entitas) {
+        validasi(entitas);
         try {
-            super.update(entity);
+            super.update(entitas);
         } catch (Exception e) {
-            System.err.println("[SERVICE ERROR] Failed to update entity: " + e.getMessage());
-            throw new ServiceException("Could not update dummy entity", e);
+            System.err.println("[KESALAHAN LAYANAN] Gagal memperbarui entitas: " + e.getMessage());
+            throw new ServiceException("Tidak dapat memperbarui entitas dummy", e);
         }
     }
 
     @Override
     public void printAllDummies() {
-        System.out.println("[SERVICE] Fetching all entities for display...");
-        List<DummyEntity> dummies = getAll();
-        if (dummies.isEmpty()) {
-            System.out.println("[SERVICE] No entities found.");
+        System.out.println("[LAYANAN] Mengambil semua entitas untuk ditampilkan...");
+        List<DummyEntity> daftarDummy = getAll();
+        if (daftarDummy.isEmpty()) {
+            System.out.println("[LAYANAN] Tidak ada entitas yang ditemukan.");
         } else {
-            dummies.forEach(d -> System.out.println("  > " + d));
+            for (DummyEntity d : daftarDummy) {
+                System.out.println("  > " + d);
+            }
         }
     }
 
     /**
-     * Business validation logic.
-     * Ensures that data integrity is maintained before reaching the persistence layer.
+     * Logika validasi bisnis.
+     * Memastikan integritas data terjaga sebelum mencapai lapisan persistensi.
      */
-    private void validate(DummyEntity entity) {
-        if (entity == null) {
-            throw new ServiceException("Entity cannot be null");
+    private void validasi(DummyEntity entitas) {
+        if (entitas == null) {
+            throw new ServiceException("Entitas tidak boleh null");
         }
-        if (entity.getName() == null || entity.getName().trim().isEmpty()) {
-            throw new ServiceException("Entity name is mandatory and cannot be blank");
+        if (entitas.getNama() == null || entitas.getNama().trim().isEmpty()) {
+            throw new ServiceException("Nama entitas wajib diisi dan tidak boleh kosong");
         }
     }
 }

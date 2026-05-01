@@ -6,75 +6,75 @@ import util.DBConnection;
 import java.util.List;
 
 /**
- * Main application class (Client Layer).
+ * Kelas aplikasi utama (Lapisan Client).
  * 
- * Demonstrates the use of the architecturally mature Data Mapper foundation.
- * Note that this layer depends on the Service Interface, not the implementation.
+ * Mendemonstrasikan penggunaan fondasi Data Mapper yang matang secara arsitektural.
+ * Perhatikan bahwa lapisan ini bergantung pada Interface Service, bukan implementasinya.
  */
 public class Main {
     public static void main(String[] args) {
-        printHeader("JAVA DATA MAPPER - PROFESSIONAL FOUNDATION");
+        cetakHeader("JAVA DATA MAPPER - FONDASI PROFESIONAL");
 
-        // Dependency Inversion: Main depends on the Interface
+        // Dependency Inversion: Main bergantung pada Interface
         DummyService dummyService = new DummyServiceImpl();
 
         try {
-            // 1. CREATE OPERATION
-            System.out.println("[ACTION] Initializing dummy data...");
-            DummyEntity first = new DummyEntity("Architectural Record");
-            DummyEntity second = new DummyEntity("Mature Foundation");
+            // 1. OPERASI CREATE
+            System.out.println("[LANGKAH 1] Inisialisasi data dummy...");
+            DummyEntity pertama = new DummyEntity("Catatan Arsitektural");
+            DummyEntity kedua = new DummyEntity("Fondasi yang Matang");
             
-            dummyService.save(first);
-            dummyService.save(second);
+            dummyService.save(pertama);
+            dummyService.save(kedua);
             
-            System.out.println("[STATUS] Data initialized successfully.\n");
+            System.out.println("[STATUS] Data berhasil diinisialisasi.\n");
 
-            // 2. READ OPERATION (Demonstrating JCF visibility with explicit loops)
-            System.out.println("[ACTION] Retrieving all records from database:");
-            List<DummyEntity> allRecords = dummyService.getAll();
+            // 2. OPERASI READ (Mendemonstrasikan visibilitas JCF dengan loop eksplisit)
+            System.out.println("[LANGKAH 2] Mengambil semua catatan dari database:");
+            List<DummyEntity> semuaCatatan = dummyService.getAll();
             
-            // Professional iteration using enhanced for-loop (JCF Visibility)
-            for (DummyEntity entity : allRecords) {
-                System.out.println("  ID: " + entity.getId() + " | Name: " + entity.getName());
+            // Iterasi profesional menggunakan enhanced for-loop (Visibilitas JCF)
+            for (DummyEntity entitas : semuaCatatan) {
+                System.out.println("  ID: " + entitas.getId() + " | Nama: " + entitas.getNama());
             }
             System.out.println();
 
-            // 3. UPDATE OPERATION
-            if (!allRecords.isEmpty()) {
-                DummyEntity toUpdate = allRecords.get(0);
-                System.out.println("[ACTION] Updating record ID " + toUpdate.getId() + "...");
-                toUpdate.setName(toUpdate.getName() + " (Verified)");
-                dummyService.update(toUpdate);
+            // 3. OPERASI UPDATE
+            if (!semuaCatatan.isEmpty()) {
+                DummyEntity entitasDiperbarui = semuaCatatan.get(0);
+                System.out.println("[LANGKAH 3] Memperbarui catatan ID " + entitasDiperbarui.getId() + "...");
+                entitasDiperbarui.setNama(entitasDiperbarui.getNama() + " (Terverifikasi)");
+                dummyService.update(entitasDiperbarui);
                 
-                DummyEntity updated = dummyService.getById(toUpdate.getId());
-                System.out.println("[STATUS] Updated name: " + updated.getName() + "\n");
+                DummyEntity hasilUpdate = dummyService.getById(entitasDiperbarui.getId());
+                System.out.println("[STATUS] Nama terbaru: " + hasilUpdate.getNama() + "\n");
             }
 
-            // 4. BUSINESS LOGIC DEMONSTRATION
-            System.out.println("[ACTION] Demonstrating Service-level processing:");
+            // 4. DEMONSTRASI LOGIKA BISNIS
+            System.out.println("[LANGKAH 4] Demonstrasi pemrosesan tingkat Layanan:");
             dummyService.printAllDummies();
 
         } catch (Exception e) {
-            System.err.println("\n[CRITICAL ERROR] Application execution failed:");
-            System.err.println("  Reason: " + e.getMessage());
+            System.err.println("\n[KESALAHAN KRITIS] Eksekusi aplikasi gagal:");
+            System.err.println("  Alasan: " + e.getMessage());
         } finally {
-            // Cleanup
-            System.out.println("\n[SYSTEM] Shutting down...");
+            // Pembersihan
+            System.out.println("\n[SISTEM] Mematikan sistem...");
             DBConnection.closeConnection();
         }
 
-        printFooter();
+        cetakFooter();
     }
 
-    private static void printHeader(String title) {
+    private static void cetakHeader(String judul) {
         System.out.println("====================================================");
-        System.out.println("   " + title);
+        System.out.println("   " + judul);
         System.out.println("====================================================\n");
     }
 
-    private static void printFooter() {
+    private static void cetakFooter() {
         System.out.println("\n====================================================");
-        System.out.println("   DEMONSTRATION COMPLETED SUCCESSFULLY");
+        System.out.println("   DEMONSTRASI BERHASIL DISELESAIKAN");
         System.out.println("====================================================");
     }
 }

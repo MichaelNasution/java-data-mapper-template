@@ -6,49 +6,49 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * Utility class for managing JDBC database connections.
- * Implements basic connection management and error reporting.
+ * Kelas utilitas untuk mengelola koneksi database JDBC.
+ * Mengimplementasikan manajemen koneksi dasar dan pelaporan kesalahan.
  */
 public class DBConnection {
-    private static Connection connection = null;
+    private static Connection koneksi = null;
 
     /**
-     * Gets a database connection using DriverManager.
+     * Mendapatkan koneksi database menggunakan DriverManager.
      *
-     * @return Connection object
-     * @throws SQLException if a database access error occurs
+     * @return Objek Connection
+     * @throws SQLException jika terjadi kesalahan akses database
      */
     public static Connection getConnection() throws SQLException {
-        if (connection == null || connection.isClosed()) {
+        if (koneksi == null || koneksi.isClosed()) {
             try {
-                // Ensure PostgreSQL driver is loaded
+                // Memastikan driver PostgreSQL dimuat
                 Class.forName("org.postgresql.Driver");
-                connection = DriverManager.getConnection(
+                koneksi = DriverManager.getConnection(
                     DatabaseConfig.URL,
                     DatabaseConfig.USER,
                     DatabaseConfig.PASSWORD
                 );
             } catch (ClassNotFoundException e) {
-                System.err.println("[DB ERROR] PostgreSQL JDBC Driver not found in classpath.");
-                throw new SQLException("PostgreSQL JDBC Driver missing", e);
+                System.err.println("[KESALAHAN DB] Driver JDBC PostgreSQL tidak ditemukan di classpath.");
+                throw new SQLException("Driver JDBC PostgreSQL tidak ada", e);
             } catch (SQLException e) {
-                System.err.println("[DB ERROR] Failed to connect to database at: " + DatabaseConfig.URL);
+                System.err.println("[KESALAHAN DB] Gagal menghubungkan ke database di: " + DatabaseConfig.URL);
                 throw e;
             }
         }
-        return connection;
+        return koneksi;
     }
 
     /**
-     * Closes the database connection gracefully.
+     * Menutup koneksi database dengan aman.
      */
     public static void closeConnection() {
-        if (connection != null) {
+        if (koneksi != null) {
             try {
-                connection.close();
-                System.out.println("[DB] Connection closed successfully.");
+                koneksi.close();
+                System.out.println("[DB] Koneksi berhasil ditutup.");
             } catch (SQLException e) {
-                System.err.println("[DB ERROR] Error closing connection: " + e.getMessage());
+                System.err.println("[KESALAHAN DB] Terjadi kesalahan saat menutup koneksi: " + e.getMessage());
             }
         }
     }
